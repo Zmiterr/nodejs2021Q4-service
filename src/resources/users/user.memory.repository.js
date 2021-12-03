@@ -4,11 +4,11 @@ const User = require('./user.model');
 const getAll = async () => inMemoryDB.users;
 
 const getUser = async (id) => {
-  const user = inMemoryDB.users.filter((item) => item.id === id)[0];
-  if (!user) {
+  const userById = inMemoryDB.users.filter((user) => user.id === id)[0];
+  if (!userById) {
     throw new Error(`User with id ${id} not found`);
   }
-  return User.toResponse(user);
+  return User.toResponse(userById);
 };
 
 const createUser = async (user) => {
@@ -18,10 +18,10 @@ const createUser = async (user) => {
 };
 
 const updateUser = async (id, updateData) => {
-  if (inMemoryDB.users.findIndex((item) => item.id === id) === -1) {
+  if (inMemoryDB.users.findIndex((user) => user.id === id) === -1) {
     throw new Error(`User with id ${id} not found`);
   }
-  const userIndex = inMemoryDB.users.findIndex((item) => item.id === id);
+  const userIndex = inMemoryDB.users.findIndex((user) => user.id === id);
   let updatedUser = inMemoryDB.users[userIndex];
   updatedUser = { ...updatedUser, ...updateData };
   inMemoryDB.users[userIndex] = updatedUser;
@@ -29,16 +29,14 @@ const updateUser = async (id, updateData) => {
 };
 
 const deleteUser = (id) => {
-  if (inMemoryDB.users.findIndex((item) => item.id === id) === -1) {
+  if (inMemoryDB.users.findIndex((user) => user.id === id) === -1) {
     throw new Error(`User with id ${id} not found`);
   }
-  const filteredUsers = inMemoryDB.users.filter((item) => item.id !== id);
-  inMemoryDB.users = filteredUsers;
+  inMemoryDB.users = inMemoryDB.users.filter((user) => user.id !== id);
 
-// TODO delete user from tasks
+  // TODO delete user from tasks
 
   return id;
 };
-
 
 module.exports = { getAll, getUser, createUser, deleteUser, updateUser };
