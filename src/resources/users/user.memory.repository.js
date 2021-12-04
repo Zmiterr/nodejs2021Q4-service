@@ -28,13 +28,16 @@ const updateUser = async (id, updateData) => {
   return User.toResponse(updatedUser);
 };
 
-const deleteUser = (id) => {
+const deleteUser = async (id) => {
   if (inMemoryDB.users.findIndex((user) => user.id === id) === -1) {
     throw new Error(`User with id ${id} not found`);
   }
   inMemoryDB.users = inMemoryDB.users.filter((user) => user.id !== id);
 
-  // TODO delete user from tasks
+  inMemoryDB.tasks.forEach((task) => {
+    const editedTask = task;
+    if (task.userId === id) editedTask.userId = null;
+  });
 
   return id;
 };

@@ -34,7 +34,7 @@ const deleteBoard = async (id) => {
   }
   inMemoryDB.boards = inMemoryDB.boards.filter((board) => board.id !== id);
 
-  // TODO delete user from tasks
+  inMemoryDB.tasks = inMemoryDB.tasks.filter((item) => item.boardId !== id);
 
   return id;
 };
