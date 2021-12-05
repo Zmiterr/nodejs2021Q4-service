@@ -1,6 +1,3 @@
-// const path = require('path');
-// const YAML = require('yamljs');
-
 const fastify = require('fastify');
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
@@ -9,7 +6,18 @@ const taskRouter = require('./resources/tasks/task.router');
 const app = fastify({
   logger: true,
 });
-// const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
+
+app.register(require('fastify-swagger'), {
+  exposeRoute: true,
+  routePrefix: '/doc',
+  mode: 'static',
+  specification: {
+    path: './doc/api.yaml',
+  },
+  swagger: {
+    info: { title: 'fastify-api' },
+  },
+});
 
 // app.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
@@ -20,16 +28,16 @@ const app = fastify({
 //   }
 //   next();
 // });
-
-userRouter.forEach((route) => {
+const routes = [...userRouter, ...boardRouter, ...taskRouter];
+routes.forEach((route) => {
   app.route(route);
 });
-boardRouter.forEach((route) => {
-  app.route(route);
-});
-taskRouter.forEach((route) => {
-  app.route(route);
-});
+// boardRouter.forEach((route) => {
+//   app.route(route);
+// });
+// taskRouter.forEach((route) => {
+//   app.route(route);
+// });
 
 app.get('/', async () => 'Service is running!');
 
