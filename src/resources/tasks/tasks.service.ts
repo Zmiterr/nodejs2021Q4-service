@@ -1,4 +1,5 @@
-const tasksRepo = require('./task.memory.repository');
+// const tasksRepo = require('./task.memory.repository');
+import tasksRepo from './task.memory.repository';
 
 // const getAll = (id) => tasksRepo.getAllTasks(id);
 const getAll = async (req, res) => {
@@ -58,4 +59,4 @@ const deleteByID = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getByID, create, deleteByID, updateByID };
+export default { getAll, getByID, create, deleteByID, updateByID };

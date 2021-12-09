@@ -1,6 +1,8 @@
-const usersRepo = require('./user.memory.repository');
+// const usersRepo = require('./user.memory.repository');
+import usersRepo from './user.memory.repository';
 
 // const getAll = () => usersRepo.getAll();
+
 const getAll = async (req, res) => {
   try {
     const users = await usersRepo.getAll();
@@ -11,6 +13,7 @@ const getAll = async (req, res) => {
 };
 
 // const getUserByID = (id) => usersRepo.getUser(id);
+
 const getUserByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -55,7 +58,7 @@ const updateUserByID = async (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   getAll,
   getUserByID,
   createUser,
