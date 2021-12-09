@@ -1,7 +1,9 @@
-import { FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import usersRepo from './user.memory.repository';
+import User from './user.model';
+import { UserToResponse } from './types';
 
-const getAll = async (req, res) => {
+const getAll = async (_req: FastifyRequest, res: FastifyReply) => {
   try {
     const users = await usersRepo.getAll();
     res.status(200).send(users);
@@ -10,7 +12,10 @@ const getAll = async (req, res) => {
   }
 };
 
-const getUserByID = async (req, res: FastifyReply) => {
+const getUserByID = async (
+  req: { params: { id: string } },
+  res: FastifyReply
+) => {
   try {
     const { id } = req.params;
     const user = await usersRepo.getUser(id);
@@ -20,7 +25,7 @@ const getUserByID = async (req, res: FastifyReply) => {
   }
 };
 
-const createUser = async (req, res) => {
+const createUser = async (req: { body: User }, res: FastifyReply) => {
   try {
     const newUser = req.body;
     const user = await usersRepo.createUser(newUser);
@@ -30,7 +35,10 @@ const createUser = async (req, res) => {
   }
 };
 
-const deleteUserByID = async (req, res) => {
+const deleteUserByID = async (
+  req: { params: { id: string } },
+  res: FastifyReply
+) => {
   try {
     const { id } = req.params;
     const user = await usersRepo.deleteUser(id);
@@ -40,7 +48,10 @@ const deleteUserByID = async (req, res) => {
   }
 };
 
-const updateUserByID = async (req, res) => {
+const updateUserByID = async (
+  req: { params: { id: string }; body: UserToResponse },
+  res: FastifyReply
+) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
