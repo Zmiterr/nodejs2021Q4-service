@@ -1,4 +1,5 @@
-const boardsRepo = require('./board.memory.repository');
+// const boardsRepo = require('./board.memory.repository');
+import boardsRepo from './board.memory.repository';
 
 // const getAll = () => boardsRepo.getAllBoards();
 const getAll = async (req, res) => {
@@ -56,4 +57,4 @@ const deleteByID = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getByID, create, deleteByID, updateByID };
+export default { getAll, getByID, create, deleteByID, updateByID };

@@ -1,5 +1,5 @@
 // const router = require('express').Router();
-const boardsService = require('./boards.service');
+// const boardsService = require('./boards.service');
 // const usersService = require('./user.service');
 
 // router
@@ -41,6 +41,8 @@ const boardsService = require('./boards.service');
 //       res.status(404).send(error.message);
 //     }
 //   });
+import boardsService from './boards.service';
+
 const BoardRoutes = [
   {
     method: 'GET',
@@ -69,4 +71,4 @@ const BoardRoutes = [
   },
 ];
 
-module.exports = BoardRoutes;
+export default BoardRoutes;
