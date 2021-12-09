@@ -6,7 +6,7 @@ const getAll = async (req, res) => {
     const tasks = await tasksRepo.getAllTasks(boardId);
     res.status(200).send(tasks);
   } catch (err) {
-    throw new Error(err);
+    throw new Error(String(err));
   }
 };
 
@@ -17,7 +17,7 @@ const getByID = async (req, res) => {
     res.status(200).send(task);
   } catch (err) {
     res.status(404).send();
-    throw new Error(err);
+    throw new Error(String(err));
   }
 };
 
@@ -28,7 +28,7 @@ const create = async (req, res) => {
     const task = await tasksRepo.createTask(newData, boardId);
     res.status(201).send(task);
   } catch (err) {
-    throw new Error(err);
+    throw new Error(String(err));
   }
 };
 
@@ -39,7 +39,7 @@ const updateByID = async (req, res) => {
     const task = await tasksRepo.updateTask(id, newData);
     res.status(200).send(task);
   } catch (err) {
-    throw new Error(err);
+    throw new Error(String(err));
   }
 };
 
@@ -49,7 +49,7 @@ const deleteByID = async (req, res) => {
     const task = await tasksRepo.deleteTask(id);
     res.status(200).send(task);
   } catch (err) {
-    throw new Error(err);
+    throw new Error(String(err));
   }
 };
 
