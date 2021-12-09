@@ -1,7 +1,5 @@
-// const boardsRepo = require('./board.memory.repository');
 import boardsRepo from './board.memory.repository';
 
-// const getAll = () => boardsRepo.getAllBoards();
 const getAll = async (req, res) => {
   try {
     const boards = await boardsRepo.getAllBoards();
@@ -11,7 +9,6 @@ const getAll = async (req, res) => {
   }
 };
 
-// const getByID = (id) => boardsRepo.getBoard(id);
 const getByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -23,7 +20,6 @@ const getByID = async (req, res) => {
   }
 };
 
-// const create = (newData) => boardsRepo.createBoard(newData);
 const create = async (req, res) => {
   try {
     const newData = req.body;
@@ -34,7 +30,6 @@ const create = async (req, res) => {
   }
 };
 
-// const updateByID = (id, newData) => boardsRepo.updateBoard(id, newData);
 const updateByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -46,7 +41,6 @@ const updateByID = async (req, res) => {
   }
 };
 
-// const deleteByID = (id) => boardsRepo.deleteBoard(id);
 const deleteByID = async (req, res) => {
   try {
     const { id } = req.params;

@@ -1,7 +1,5 @@
-// const tasksRepo = require('./task.memory.repository');
 import tasksRepo from './task.memory.repository';
 
-// const getAll = (id) => tasksRepo.getAllTasks(id);
 const getAll = async (req, res) => {
   try {
     const { boardId } = req.params;
@@ -12,7 +10,6 @@ const getAll = async (req, res) => {
   }
 };
 
-// const getByID = (id) => tasksRepo.getTask(id);
 const getByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -24,7 +21,6 @@ const getByID = async (req, res) => {
   }
 };
 
-// const create = (updateData, board) => tasksRepo.createTask(updateData, board);
 const create = async (req, res) => {
   try {
     const { boardId } = req.params;
@@ -36,7 +32,6 @@ const create = async (req, res) => {
   }
 };
 
-// const updateByID = (id, updateData) => tasksRepo.updateTask(id, updateData);
 const updateByID = async (req, res) => {
   try {
     const { id } = req.params;
@@ -48,7 +43,6 @@ const updateByID = async (req, res) => {
   }
 };
 
-// const deleteByID = (id) => tasksRepo.deleteTask(id);
 const deleteByID = async (req, res) => {
   try {
     const { id } = req.params;

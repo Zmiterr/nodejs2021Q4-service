@@ -1,4 +1,3 @@
-// const usersService = require('./user.service');
 import usersService from './user.service';
 
 const UserRoutes = [

@@ -1,10 +1,7 @@
-// const inMemoryDB = require('../../inMemoryDB');
 import { inMemoryDB } from '../../inMemoryDB';
 import User from './user.model';
 import Task from '../tasks/task.model';
 import { UserToResponse } from './types';
-
-// const User = require('./user.model');
 
 /**
  * returns all users
@@ -16,6 +13,7 @@ const getAll = async (): Promise<UserToResponse[]> => inMemoryDB.users;
  * @param id - user id
  * @returns {User} User object
  */
+
 const getUser = async (id: string): Promise<UserToResponse> => {
   const userById = inMemoryDB.users.filter((user: User) => user.id === id)[0];
   if (!userById) {
@@ -23,6 +21,7 @@ const getUser = async (id: string): Promise<UserToResponse> => {
   }
   return User.toResponse(userById);
 };
+
 /**
  * creates new user
  * @param {User} user - user data
@@ -33,6 +32,7 @@ const createUser = async (user: User): Promise<UserToResponse> => {
   inMemoryDB.users.push(newUser);
   return User.toResponse(newUser);
 };
+
 /**
  * updates user by id
  * @param {string} id - user id
@@ -52,6 +52,7 @@ const updateUser = async (
   inMemoryDB.users[userIndex] = updatedUser;
   return User.toResponse(updatedUser);
 };
+
 /**
  * deletes user by id, deletes user tasks from Tasks
  * @param {string}  id - user id
