@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "outDir": "./dist",
+    "rootDir": "./src",
 
     // https://www.sitepoint.com/react-with-typescript-best-practices/
     "allowJs": true, // Allow JavaScript files to be compiled
@@ -11,8 +12,8 @@
     "esModuleInterop": true, // Disables namespace imports (import * as fs from "fs") and enables CJS/AMD/UMD style imports (import fs from "fs")
     "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
     "forceConsistentCasingInFileNames": true, // Disallow inconsistently-cased references to the same file.
-    "target": "es5",
-    "module": "esnext", // Specify module code generation
+    "target": "esnext",
+    "module": "nodenext", // Specify module code generation
     "moduleResolution": "node", // Resolve modules using Node.js style
     "resolveJsonModule": true, // Include modules imported with .json extension
     "noEmit": true, // Do not emit output (meaning do not compile code, only perform type checking)
@@ -24,5 +25,5 @@
     "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
   },
 
-  "include": ["src", "src/custom.d.ts"]
+  "include": ["src", "src/custom.d.ts", "./src/**/*.ts"]
 }
