@@ -2,11 +2,11 @@
 // const app = require('./app');
 import app from './app';
 
-// import PORT from './common/config';
+import evn from './common/config';
 
 (async () => {
   try {
-    await app.listen(4000);
+    await app.listen(evn.PORT);
   } catch (err) {
     app.log.error(err);
     process.exit(1);
