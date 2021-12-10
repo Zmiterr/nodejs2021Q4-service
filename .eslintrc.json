@@ -17,8 +17,10 @@
   },
   "settings": {
     "noInlineConfig": true,
-    "node": {
-      "tryExtensions": [".js", ".ts", ".d.ts"]
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
     }
   },
   "extends": [
