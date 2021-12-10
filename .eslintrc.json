@@ -24,7 +24,8 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".ts", ".d.ts"],
-        "moduleDirectory": ["node_modules", "src/"]
+        "moduleDirectory": ["node_modules", "src/"],
+        "typescript": {}
       }
     }
 },
