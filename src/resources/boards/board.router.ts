@@ -1,6 +1,6 @@
 import boardsService from './boards.service';
 
-const BoardRoutes = [
+const boardRouter = [
   {
     method: 'GET',
     url: '/boards',
@@ -28,4 +28,4 @@ const BoardRoutes = [
   },
 ];
 
-export default BoardRoutes;
+export default boardRouter;

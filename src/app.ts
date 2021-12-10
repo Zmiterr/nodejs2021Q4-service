@@ -1,7 +1,7 @@
 import fastify from 'fastify';
-import boardRouter from 'resources/boards/board.router';
-import taskRouter from 'resources/tasks/task.router';
-import userRouter from 'resources/users/user.router';
+import userRouter from './resources/users/user.router';
+import boardRouter from './resources/boards/board.router';
+import taskRouter from './resources/tasks/task.router';
 
 const app = fastify({
   logger: true,

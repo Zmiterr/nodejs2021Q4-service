@@ -1,6 +1,6 @@
 import usersService from './user.service';
 
-const UserRoutes = [
+const userRouter = [
   {
     method: 'GET',
     url: '/users',
@@ -28,4 +28,4 @@ const UserRoutes = [
   },
 ];
 
-export default UserRoutes;
+export default userRouter;
