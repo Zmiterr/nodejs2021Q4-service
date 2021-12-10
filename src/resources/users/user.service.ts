@@ -3,7 +3,20 @@ import usersRepo from './user.memory.repository';
 import User from './user.model';
 import { UserToResponse } from './types';
 
-const getAll = async (_req: FastifyRequest, res: FastifyReply) => {
+interface IUserIdParam {
+  params: { id: string };
+}
+
+/**
+ * send request all users
+ * @param {FastifyRequest} _req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
+const getAll = async (
+  _req: FastifyRequest,
+  res: FastifyReply
+): Promise<void> => {
   try {
     const users = await usersRepo.getAll();
     res.status(200).send(users);
@@ -12,10 +25,16 @@ const getAll = async (_req: FastifyRequest, res: FastifyReply) => {
   }
 };
 
+/**
+ * send request get user by id
+ * @param {IUserIdParam} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
 const getUserByID = async (
-  req: { params: { id: string } },
+  req: IUserIdParam,
   res: FastifyReply
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const user = await usersRepo.getUser(id);
@@ -25,7 +44,16 @@ const getUserByID = async (
   }
 };
 
-const createUser = async (req: { body: User }, res: FastifyReply) => {
+/**
+ * send request create user
+ * @param {{body: User}} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
+const createUser = async (
+  req: { body: User },
+  res: FastifyReply
+): Promise<void> => {
   try {
     const newUser = req.body;
     const user = await usersRepo.createUser(newUser);
@@ -35,10 +63,16 @@ const createUser = async (req: { body: User }, res: FastifyReply) => {
   }
 };
 
+/**
+ * send request delete user by id
+ * @param {IUserIdParam} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
 const deleteUserByID = async (
-  req: { params: { id: string } },
+  req: IUserIdParam,
   res: FastifyReply
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const user = await usersRepo.deleteUser(id);
@@ -48,10 +82,16 @@ const deleteUserByID = async (
   }
 };
 
+/**
+ *
+ * @param {{params: {id: string}, body: UserToResponse}} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
 const updateUserByID = async (
   req: { params: { id: string }; body: UserToResponse },
   res: FastifyReply
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const updateData = req.body;

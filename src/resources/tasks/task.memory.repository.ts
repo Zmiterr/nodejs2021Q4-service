@@ -8,12 +8,12 @@ import { TaskNoID } from './types';
  */
 const getAllTasks = async (boardId: string): Promise<Task[]> =>
   inMemoryDB.tasks.filter((task: Task) => task.boardId === boardId);
+
 /**
  * returns task by id from DB
  * @param {string} id - board id
- * @returns {Task} Task object
+ * @returns {Promise<Task>} Task object
  */
-
 const getTask = async (id: string): Promise<Task> => {
   const taskByID = inMemoryDB.tasks.filter((task: Task) => task.id === id)[0];
   if (!taskByID) {
@@ -26,7 +26,7 @@ const getTask = async (id: string): Promise<Task> => {
  * creates new task
  * @param {Task} task - task data
  * @param {string} board - board id
- * @returns {Task} Task object
+ * @returns {Promise<Task>} Task object
  */
 const createTask = async (task: Task, board: string): Promise<Task> => {
   const newTask = new Task({ ...task, boardId: board });
@@ -38,7 +38,7 @@ const createTask = async (task: Task, board: string): Promise<Task> => {
  * updates task by id
  * @param {string} id - task id
  * @param {TaskNoID} updateData - task data
- * @returns {Task} Task object
+ * @returns {Promise<Task>} Task object
  */
 const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
   const taskIndex = inMemoryDB.tasks.findIndex((task: Task) => task.id === id);
@@ -54,7 +54,7 @@ const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
 /**
  * deletes task by id from DB
  * @param {string} id - task id
- * @returns {string} - id deleted task
+ * @returns {Promise<string>} - id deleted task
  */
 const deleteTask = async (id: string): Promise<string> => {
   if (inMemoryDB.tasks.findIndex((task: Task) => task.id === id) === -1) {

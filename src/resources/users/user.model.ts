@@ -21,6 +21,11 @@ export default class User {
     this.password = password;
   }
 
+  /**
+   * Return user's id, name and login
+   * @param {Omit<User, "password">} user
+   * @returns {{name: string, id: string, login: string}}
+   */
   static toResponse(user: Omit<User, 'password'>) {
     const { id, name, login } = user;
     return { id, name, login };

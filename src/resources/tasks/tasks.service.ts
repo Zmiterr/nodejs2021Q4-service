@@ -2,18 +2,23 @@ import { FastifyReply } from 'fastify';
 import tasksRepo from './task.memory.repository';
 import Task from './task.model';
 
-interface requestParams {
+interface IBoardIdParams {
   params: { boardId: string };
 }
-// interface requestParams2 {
-//   params: { id: string };
-// }
-// interface requestParams3 {
-//   params: { boardId: string };
-//   body: Task;
-// }
+interface IIdParams {
+  params: { id: string };
+}
 
-const getAll = async (req: requestParams, res: FastifyReply) => {
+/**
+ * send request het all tasks from board
+ * @param {IBoardIdParams} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
+const getAll = async (
+  req: IBoardIdParams,
+  res: FastifyReply
+): Promise<void> => {
   try {
     const { boardId } = req.params;
     const tasks = await tasksRepo.getAllTasks(boardId);
@@ -23,7 +28,13 @@ const getAll = async (req: requestParams, res: FastifyReply) => {
   }
 };
 
-const getByID = async (req: { params: { id: string } }, res: FastifyReply) => {
+/**
+ * send request get task by id
+ * @param {IIdParams} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
+const getByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
   try {
     const { id } = req.params;
     const task = await tasksRepo.getTask(id);
@@ -34,10 +45,16 @@ const getByID = async (req: { params: { id: string } }, res: FastifyReply) => {
   }
 };
 
+/**
+ * send request create task
+ * @param {{params: {boardId: string}, body: Task}} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
 const create = async (
   req: { params: { boardId: string }; body: Task },
   res: FastifyReply
-) => {
+): Promise<void> => {
   try {
     const { boardId } = req.params;
     const newData = req.body;
@@ -48,10 +65,16 @@ const create = async (
   }
 };
 
+/**
+ * send request update task by id
+ * @param {{params: {id: string}, body: Task}} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
 const updateByID = async (
   req: { params: { id: string }; body: Task },
   res: FastifyReply
-) => {
+): Promise<void> => {
   try {
     const { id } = req.params;
     const newData = req.body;
@@ -62,10 +85,13 @@ const updateByID = async (
   }
 };
 
-const deleteByID = async (
-  req: { params: { id: string } },
-  res: FastifyReply
-) => {
+/**
+ * send request delete task bu id
+ * @param {IIdParams} req
+ * @param {FastifyReply} res
+ * @returns {Promise<void>}
+ */
+const deleteByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
   try {
     const { id } = req.params;
     const task = await tasksRepo.deleteTask(id);

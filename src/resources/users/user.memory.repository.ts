@@ -8,12 +8,12 @@ import { UserToResponse } from './types';
  * @returns {User[]} array of User objects
  */
 const getAll = async (): Promise<UserToResponse[]> => inMemoryDB.users;
+
 /**
  * get user by id
- * @param id - user id
- * @returns {User} User object
+ * @param {string} id - user id
+ * @returns {Promise<UserToResponse>} User object
  */
-
 const getUser = async (id: string): Promise<UserToResponse> => {
   const userById = inMemoryDB.users.filter((user: User) => user.id === id)[0];
   if (!userById) {
@@ -25,7 +25,7 @@ const getUser = async (id: string): Promise<UserToResponse> => {
 /**
  * creates new user
  * @param {User} user - user data
- * @returns {UserToResponse} User object
+ * @returns {Promise<UserToResponse>} User object
  */
 const createUser = async (user: User): Promise<UserToResponse> => {
   const newUser = new User(user);
@@ -36,8 +36,8 @@ const createUser = async (user: User): Promise<UserToResponse> => {
 /**
  * updates user by id
  * @param {string} id - user id
- * @param {User} updateData - User data
- * @returns {User} User object
+ * @param {UserToResponse} updateData - User data
+ * @returns {Promise<UserToResponse>} User object
  */
 const updateUser = async (
   id: string,
@@ -55,8 +55,8 @@ const updateUser = async (
 
 /**
  * deletes user by id, deletes user tasks from Tasks
- * @param {string}  id - user id
- * @returns {string} deleted user id
+ * @param {string} id - user id
+ * @returns {Promise<string>} deleted user id
  */
 const deleteUser = async (id: string): Promise<string> => {
   if (inMemoryDB.users.findIndex((user: User) => user.id === id) === -1) {

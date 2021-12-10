@@ -5,13 +5,14 @@ import { BoardNoID } from './types';
 
 /**
  * returns all boards
- * @returns {Board[]} array of Board objects
+ * @returns {Promise<Board[]>}
  */
 const getAllBoards = async (): Promise<Board[]> => inMemoryDB.boards;
+
 /**
  * returns board by id
  * @param {string} id - board id
- * @returns {Board} Board object
+ * @returns {Promise<Board>} Board object
  */
 const getBoard = async (id: string) => {
   const boardByID = inMemoryDB.boards.filter(
@@ -22,21 +23,23 @@ const getBoard = async (id: string) => {
   }
   return boardByID;
 };
+
 /**
  * creates new board
  * @param {Board} board - board data
- * @returns {Board} Board object
+ * @returns {Promise<Board>} Board object
  */
 const createBoard = async (board: Board): Promise<Board> => {
   const newBoard = new Board(board);
   inMemoryDB.boards.push(newBoard);
   return newBoard;
 };
+
 /**
  * updates board by id
  * @param {string} id - board id
  * @param {BoardNoID} updateData - board data
- * @returns {Board} Board object
+ * @returns {Promise<Board>} Board object
  */
 const updateBoard = async (
   id: string,
@@ -53,10 +56,11 @@ const updateBoard = async (
   inMemoryDB.boards[boardIndex] = updatedBoard;
   return updatedBoard;
 };
+
 /**
  * deletes board by id, deletes board tasks from Tasks
- * @param {string} id board id
- * @returns {string} id deleted board
+ * @param {string} id - board id
+ * @returns {Promise<string>} id deleted board
  */
 const deleteBoard = async (id: string): Promise<string> => {
   if (inMemoryDB.boards.findIndex((board: Board) => board.id === id) === -1) {
