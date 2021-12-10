@@ -28,9 +28,13 @@
         "extensions": [".js", ".ts", ".d.ts"],
         "moduleDirectory": ["node_modules", "src/"],
         "typescript": {}
+      },
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "."
       }
     }
-},
+  },
   "extends": [
     "eslint:recommended",
     "plugin:node/recommended",
@@ -48,6 +52,6 @@
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
-    "dot-notation":"off"
+    "dot-notation": "off"
   }
 }
