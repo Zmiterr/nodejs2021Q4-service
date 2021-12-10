@@ -2,7 +2,7 @@
 // const app = require('./app');
 import app from './app';
 
-// import { PORT } from './common/config');
+// import PORT from './common/config';
 
 (async () => {
   try {
