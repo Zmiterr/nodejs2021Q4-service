@@ -16,7 +16,10 @@
     }
   },
   "settings": {
-    "noInlineConfig": true
+    "noInlineConfig": true,
+    "node": {
+      "tryExtensions": [".js", ".ts", ".d.ts"]
+    }
   },
   "extends": [
     "eslint:recommended",
