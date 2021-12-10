@@ -36,6 +36,7 @@
     "plugin:import/typescript"
   ],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
     "node/no-missing-import": "off",
     "node/no-missing-require": "off",
     "import/no-unresolved": [0],
