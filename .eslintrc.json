@@ -18,11 +18,13 @@
   "settings": {
     "noInlineConfig": true,
     "node": {
-      "tryExtensions": [".js", ".ts", ".d.ts"]
+      "tryExtensions": [".js", ".ts", ".d.ts"],
+      "moduleDirectory": ["node_modules", "src/"]
     },
     "import/resolver": {
       "node": {
-        "extensions": [".js", ".ts", ".d.ts"]
+        "extensions": [".js", ".ts", ".d.ts"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
 },
