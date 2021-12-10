@@ -40,12 +40,16 @@
     "@typescript-eslint/no-explicit-any": "error",
     "node/no-missing-import": "off",
     "node/no-missing-require": "off",
-    "import/no-unresolved": [0],
+
     "import/extensions": "off",
     "linebreak-style": "off",
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
-    "dot-notation":"off"
+    "dot-notation":"off",
+    "import/no-unresolved": [
+      2,
+      { "caseSensitive": false }
+    ]
   }
 }
