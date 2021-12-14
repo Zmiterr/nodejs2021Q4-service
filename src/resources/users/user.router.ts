@@ -1,5 +1,11 @@
 import usersService from './user.service';
 
+// interface IRoute {
+//   method: string;
+//   url: string;
+//   handler: RouteHandlerMethod;
+// }
+
 const userRouter = [
   {
     method: 'GET',

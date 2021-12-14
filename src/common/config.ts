@@ -15,16 +15,9 @@
 import path from 'path';
 import dotenv from 'dotenv';
 
-const nodeEnv = `${process.env.NODE_ENV}`;
-
-const getEnv = {
-  path: path.resolve(__dirname, '..', '..', '.env'),
-};
-
-// @ts-ignore
-const getEnvs = getEnv[nodeEnv];
-
-dotenv.config({ path: getEnvs });
+dotenv.config({
+  path: path.join(__dirname, '../../.env'),
+});
 
 export default {
   NODE_ENV: process.env.NODE_ENV,

@@ -7,6 +7,11 @@ interface DB {
   boards: Board[];
   tasks: Task[];
 }
+
+/**
+ * DB in memory
+ * @type {{boards: any[], users: any[], tasks: any[]}}
+ */
 export const inMemoryDB: DB = {
   users: [],
   boards: [],
