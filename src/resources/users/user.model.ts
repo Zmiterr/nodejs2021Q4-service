@@ -1,5 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * User model
+ */
 export default class User {
   id: string;
 
@@ -9,6 +12,13 @@ export default class User {
 
   password: string;
 
+  /**
+   * User constructor
+   * @param id - id
+   * @param name - name
+   * @param login - login
+   * @param password - password
+   */
   constructor({
     id = uuidv4(),
     name = 'USER',
@@ -23,8 +33,8 @@ export default class User {
 
   /**
    * Return user's id, name and login
-   * @param {Omit<User, "password">} user
-   * @returns {{name: string, id: string, login: string}}
+   * @param user - full user  data
+   * @returns - user data without passwords
    */
   static toResponse(user: Omit<User, 'password'>) {
     const { id, name, login } = user;

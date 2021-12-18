@@ -1,5 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
 
+/**
+ * task model
+ */
 export default class Task {
   id: string;
 
@@ -15,6 +18,16 @@ export default class Task {
 
   columnId?: string | null;
 
+  /**
+   * Task constructor
+   * @param  id - id
+   * @param  title - title
+   * @param  order - order
+   * @param  description - description
+   * @param userId - userId
+   * @param boardId - boardId
+   * @param  columnId - columnId
+   */
   constructor({
     id = uuidv4(),
     title,

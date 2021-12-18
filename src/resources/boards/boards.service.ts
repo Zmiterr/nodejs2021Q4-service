@@ -4,10 +4,9 @@ import Board from './board.model';
 import { BoardNoID } from './types';
 
 /**
- * send request get all bords
- * @param {FastifyRequest} _req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * send request get all boards
+ * @param _req - request void
+ * @param res - response all boards
  */
 const getAll = async (
   _req: FastifyRequest,
@@ -23,9 +22,8 @@ const getAll = async (
 
 /**
  * send request get board by id
- * @param {{params: {id: string}}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request board id
+ * @param res - response board
  */
 const getByID = async (
   req: { params: { id: string } },
@@ -43,9 +41,8 @@ const getByID = async (
 
 /**
  * send request create board
- * @param {{body: Board}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request board data
+ * @param res - response new board
  */
 const create = async (
   req: { body: Board },
@@ -62,9 +59,8 @@ const create = async (
 
 /**
  * send request update board by id
- * @param {{params: {id: string}, body: BoardNoID}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request board data
+ * @param res - response updated board
  */
 const updateByID = async (
   req: { params: { id: string }; body: BoardNoID },
@@ -82,9 +78,9 @@ const updateByID = async (
 
 /**
  * send request delete board by id
- * @param {{params: {id: string}}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request board id
+ * @param res - response board id
+
  */
 const deleteByID = async (
   req: { params: { id: string } },

@@ -11,9 +11,8 @@ interface IIdParams {
 
 /**
  * send request het all tasks from board
- * @param {IBoardIdParams} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request task id
+ * @param  res - response tasks by board id
  */
 const getAll = async (
   req: IBoardIdParams,
@@ -30,9 +29,9 @@ const getAll = async (
 
 /**
  * send request get task by id
- * @param {IIdParams} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request task id
+ * @param res - response task
+
  */
 const getByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
   try {
@@ -47,9 +46,9 @@ const getByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
 
 /**
  * send request create task
- * @param {{params: {boardId: string}, body: Task}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request task data
+ * @param res - response new task
+
  */
 const create = async (
   req: { params: { boardId: string }; body: Task },
@@ -67,9 +66,9 @@ const create = async (
 
 /**
  * send request update task by id
- * @param {{params: {id: string}, body: Task}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request task data
+ * @param res - response edited task
+
  */
 const updateByID = async (
   req: { params: { id: string }; body: Task },
@@ -86,10 +85,10 @@ const updateByID = async (
 };
 
 /**
- * send request delete task bu id
- * @param {IIdParams} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * send request delete task by id
+ * @param req - request task id
+ * @param res - response task id
+
  */
 const deleteByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
   try {

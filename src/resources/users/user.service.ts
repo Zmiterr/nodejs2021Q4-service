@@ -9,9 +9,8 @@ interface IUserIdParam {
 
 /**
  * send request all users
- * @param {FastifyRequest} _req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param  _req - request void
+ * @param  res - response user array
  */
 const getAll = async (
   _req: FastifyRequest,
@@ -27,9 +26,8 @@ const getAll = async (
 
 /**
  * send request get user by id
- * @param {IUserIdParam} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param  req - request user id
+ * @param  res - response user
  */
 const getUserByID = async (
   req: IUserIdParam,
@@ -46,9 +44,8 @@ const getUserByID = async (
 
 /**
  * send request create user
- * @param {{body: User}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request user object
+ * @param res - new user object
  */
 const createUser = async (
   req: { body: User },
@@ -65,9 +62,8 @@ const createUser = async (
 
 /**
  * send request delete user by id
- * @param {IUserIdParam} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * @param req - request user id
+ * @param res - response user id
  */
 const deleteUserByID = async (
   req: IUserIdParam,
@@ -83,10 +79,10 @@ const deleteUserByID = async (
 };
 
 /**
- *
- * @param {{params: {id: string}, body: UserToResponse}} req
- * @param {FastifyReply} res
- * @returns {Promise<void>}
+ * send request update user by id
+ * @param req - request user object
+ * @param res - new user object
+
  */
 const updateUserByID = async (
   req: { params: { id: string }; body: UserToResponse },
