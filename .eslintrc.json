@@ -7,7 +7,9 @@
     "node": true
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint/eslint-plugin"],
+  "plugins": ["@typescript-eslint/eslint-plugin",
+    "eslint-plugin-tsdoc"
+  ],
   "parserOptions": {
     "sourceType": "module",
     "ecmaVersion": 2021,
@@ -37,6 +39,7 @@
   },
   "extends": [
     "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
     "plugin:node/recommended",
     "airbnb-base",
     "prettier",
@@ -52,6 +55,7 @@
     "node/no-unsupported-features/es-syntax": "off",
     "no-underscore-dangle": "off",
     "import/prefer-default-export": "off",
-    "dot-notation": "off"
+    "dot-notation": "off",
+    "tsdoc/syntax": "warn"
   }
 }
