@@ -3,6 +3,11 @@ import usersRepo from './user.memory.repository';
 import User from './user.model';
 import { UserToResponse } from './types';
 
+export interface Entity {
+  id: string;
+  boardId?: string;
+}
+
 export interface FastifyReq<T = Entity, P = Entity> {
   body: T;
   params: P;
@@ -35,7 +40,9 @@ const getUserByID = async (
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const {
+      params: { id },
+    } = req as FastifyReq;
     const user = await usersRepo.getUser(id);
     res.status(200).send(user);
   } catch (err) {
@@ -49,11 +56,11 @@ const getUserByID = async (
  * @param res - new user object
  */
 const createUser = async (
-  req: { body: User },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const newUser = req.body;
+    const { body: newUser } = req as FastifyReq<User>;
     const user = await usersRepo.createUser(newUser);
     res.status(201).send(user);
   } catch (err) {
@@ -67,11 +74,13 @@ const createUser = async (
  * @param res - response user id
  */
 const deleteUserByID = async (
-  req: IUserIdParam,
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const {
+      params: { id },
+    } = req as FastifyReq;
     const user = await usersRepo.deleteUser(id);
     res.status(200).send(user);
   } catch (err) {
@@ -86,12 +95,14 @@ const deleteUserByID = async (
 
  */
 const updateUserByID = async (
-  req: { params: { id: string }; body: UserToResponse },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
-    const updateData = req.body;
+    const {
+      params: { id },
+      body: updateData,
+    } = req as FastifyReq<UserToResponse>;
     const user = await usersRepo.updateUser(id, updateData);
     res.status(200).send(user);
   } catch (err) {
