@@ -47,7 +47,7 @@ const updateUser = async (
     throw new Error(`User with id ${id} not found`);
   }
   const userIndex = inMemoryDB.users.findIndex((user: User) => user.id === id);
-  let updatedUser: User = inMemoryDB.users[userIndex]!;
+  let updatedUser: User = inMemoryDB.users[userIndex];
   updatedUser = { ...updatedUser, ...updateData };
   inMemoryDB.users[userIndex] = updatedUser;
   return User.toResponse(updatedUser);

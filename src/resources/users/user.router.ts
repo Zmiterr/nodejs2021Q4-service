@@ -1,34 +1,34 @@
 import usersService from './user.service';
 
-// interface IRoute {
+// export interface IRoute {
 //   method: string;
 //   url: string;
-//   handler: RouteHandlerMethod;
+//   handler: (req: FastifyRequest, res: FastifyReply) => Promise<unknown>;
 // }
 
 const userRouter = [
   {
-    method: 'GET',
+    method: 'GET' as const,
     url: '/users',
     handler: usersService.getAll,
   },
   {
-    method: 'GET',
+    method: 'GET' as const,
     url: '/users/:id',
     handler: usersService.getUserByID,
   },
   {
-    method: 'POST',
+    method: 'POST' as const,
     url: '/users',
     handler: usersService.createUser,
   },
   {
-    method: 'PUT',
+    method: 'PUT' as const,
     url: '/users/:id',
     handler: usersService.updateUserByID,
   },
   {
-    method: 'DELETE',
+    method: 'DELETE' as const,
     url: '/users/:id',
     handler: usersService.deleteUserByID,
   },

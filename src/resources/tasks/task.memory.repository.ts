@@ -45,7 +45,7 @@ const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
   if (taskIndex === -1 || !inMemoryDB.tasks[taskIndex]) {
     throw new Error(`Task with id ${id} not found`);
   }
-  const currentTask: Task = inMemoryDB.tasks![taskIndex]!;
+  const currentTask: Task = inMemoryDB.tasks[taskIndex];
   const updatedTask = { ...currentTask, ...updateData };
   inMemoryDB.tasks[taskIndex] = updatedTask;
   return updatedTask;

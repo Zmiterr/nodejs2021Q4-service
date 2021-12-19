@@ -3,8 +3,9 @@ import usersRepo from './user.memory.repository';
 import User from './user.model';
 import { UserToResponse } from './types';
 
-interface IUserIdParam {
-  params: { id: string };
+export interface FastifyReq<T = Entity, P = Entity> {
+  body: T;
+  params: P;
 }
 
 /**
@@ -30,7 +31,7 @@ const getAll = async (
  * @param  res - response user
  */
 const getUserByID = async (
-  req: IUserIdParam,
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {

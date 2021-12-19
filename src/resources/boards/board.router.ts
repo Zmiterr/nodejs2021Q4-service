@@ -2,27 +2,27 @@ import boardsService from './boards.service';
 
 const boardRouter = [
   {
-    method: 'GET',
+    method: 'GET' as const,
     url: '/boards',
     handler: boardsService.getAll,
   },
   {
-    method: 'GET',
+    method: 'GET' as const,
     url: '/boards/:id',
     handler: boardsService.getByID,
   },
   {
-    method: 'POST',
+    method: 'POST' as const,
     url: '/boards',
     handler: boardsService.create,
   },
   {
-    method: 'PUT',
+    method: 'PUT' as const,
     url: '/boards/:id',
     handler: boardsService.updateByID,
   },
   {
-    method: 'DELETE',
+    method: 'DELETE' as const,
     url: '/boards/:id',
     handler: boardsService.deleteByID,
   },

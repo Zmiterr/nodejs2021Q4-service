@@ -7,21 +7,20 @@ const app = fastify({
   logger: true,
 });
 
-app.register(require('fastify-swagger'), {
-  exposeRoute: true,
-  routePrefix: '/doc',
-  mode: 'static',
-  specification: {
-    path: './doc/api.yaml',
-  },
-  swagger: {
-    info: { title: 'fastify-api' },
-  },
-});
+// app.register(require('fastify-swagger'), {
+//   exposeRoute: true,
+//   routePrefix: '/doc',
+//   mode: 'static',
+//   specification: {
+//     path: './doc/api.yaml',
+//   },
+//   swagger: {
+//     info: { title: 'fastify-api' },
+//   },
+// });
 
 const routes = [...userRouter, ...boardRouter, ...taskRouter];
 routes.forEach((route) => {
-  // @ts-ignore
   app.route(route);
 });
 

@@ -51,7 +51,7 @@ const updateBoard = async (
   const boardIndex = inMemoryDB.boards.findIndex(
     (board: Board) => board.id === id
   );
-  const currentBoard: Board = inMemoryDB.boards[boardIndex]!;
+  const currentBoard: Board = inMemoryDB.boards[boardIndex];
   const updatedBoard = { ...currentBoard, ...updateData };
   inMemoryDB.boards[boardIndex] = updatedBoard;
   return updatedBoard;

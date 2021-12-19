@@ -45,11 +45,11 @@ const getByID = async (
  * @param res - response new board
  */
 const create = async (
-  req: { body: Board },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const newData = req.body;
+    const { body: newData } = req as FastifyReq<Board>;
     const board = await boardsRepo.createBoard(newData);
     res.status(201).send(board);
   } catch (err) {
@@ -63,12 +63,15 @@ const create = async (
  * @param res - response updated board
  */
 const updateByID = async (
-  req: { params: { id: string }; body: BoardNoID },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
-    const newData = req.body;
+    const {
+      params: { id },
+      body: newData,
+    } = req as FastifyReq<Board>;
+
     const board = await boardsRepo.updateBoard(id, newData);
     res.status(200).send(board);
   } catch (err) {
@@ -83,11 +86,13 @@ const updateByID = async (
 
  */
 const deleteByID = async (
-  req: { params: { id: string } },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
+    const {
+      params: { id },
+    } = req as FastifyReq;
     const board = await boardsRepo.deleteBoard(id);
     res.status(200).send(board);
   } catch (err) {

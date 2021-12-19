@@ -1,13 +1,9 @@
-import { FastifyReply } from 'fastify';
+import { FastifyReply, FastifyRequest } from 'fastify';
 import tasksRepo from './task.memory.repository';
 import Task from './task.model';
+import { FastifyReq } from '../users/user.service';
 
-interface IBoardIdParams {
-  params: { boardId: string };
-}
-interface IIdParams {
-  params: { id: string };
-}
+type IIdParams = FastifyReq<Body, { boardId: string }>;
 
 /**
  * send request het all tasks from board
@@ -15,11 +11,13 @@ interface IIdParams {
  * @param  res - response tasks by board id
  */
 const getAll = async (
-  req: IBoardIdParams,
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { boardId } = req.params;
+    const {
+      params: { boardId },
+    } = req as IIdParams;
     const tasks = await tasksRepo.getAllTasks(boardId);
     res.status(200).send(tasks);
   } catch (err) {
@@ -33,9 +31,14 @@ const getAll = async (
  * @param res - response task
 
  */
-const getByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
+const getByID = async (
+  req: FastifyRequest,
+  res: FastifyReply
+): Promise<void> => {
   try {
-    const { id } = req.params;
+    const {
+      params: { id },
+    } = req as FastifyReq;
     const task = await tasksRepo.getTask(id);
     res.status(200).send(task);
   } catch (err) {
@@ -51,12 +54,14 @@ const getByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
 
  */
 const create = async (
-  req: { params: { boardId: string }; body: Task },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { boardId } = req.params;
-    const newData = req.body;
+    const {
+      params: { boardId },
+      body: newData,
+    } = req as FastifyReq<Task, { boardId: string }>;
     const task = await tasksRepo.createTask(newData, boardId);
     res.status(201).send(task);
   } catch (err) {
@@ -68,15 +73,16 @@ const create = async (
  * send request update task by id
  * @param req - request task data
  * @param res - response edited task
-
  */
 const updateByID = async (
-  req: { params: { id: string }; body: Task },
+  req: FastifyRequest,
   res: FastifyReply
 ): Promise<void> => {
   try {
-    const { id } = req.params;
-    const newData = req.body;
+    const {
+      params: { id },
+      body: newData,
+    } = req as FastifyReq<Task>;
     const task = await tasksRepo.updateTask(id, newData);
     res.status(200).send(task);
   } catch (err) {
@@ -90,9 +96,14 @@ const updateByID = async (
  * @param res - response task id
 
  */
-const deleteByID = async (req: IIdParams, res: FastifyReply): Promise<void> => {
+const deleteByID = async (
+  req: FastifyRequest,
+  res: FastifyReply
+): Promise<void> => {
   try {
-    const { id } = req.params;
+    const {
+      params: { id },
+    } = req as FastifyReq;
     const task = await tasksRepo.deleteTask(id);
     res.status(200).send(task);
   } catch (err) {
