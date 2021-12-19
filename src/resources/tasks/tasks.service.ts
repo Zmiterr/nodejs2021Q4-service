@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import tasksRepo from './task.memory.repository';
 import Task from './task.model';
-import { FastifyReq } from '../users/user.service';
+import { FastifyReq } from '../types';
 
 type IIdParams = FastifyReq<Body, { boardId: string }>;
 

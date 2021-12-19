@@ -2,16 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import usersRepo from './user.memory.repository';
 import User from './user.model';
 import { UserToResponse } from './types';
-
-export interface Entity {
-  id: string;
-  boardId?: string;
-}
-
-export interface FastifyReq<T = Entity, P = Entity> {
-  body: T;
-  params: P;
-}
+import { FastifyReq } from '../types';
 
 /**
  * send request all users
