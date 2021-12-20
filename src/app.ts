@@ -11,6 +11,13 @@ const app = fastify({
   },
 });
 
+app.addHook('preHandler', async (req: FastifyRequest, reply: FastifyReply) => {
+  if (req.body) {
+    req.log.info({ body: req.body, params: req.params }, 'parsed body');
+    reply.log.info({ body: req.body }, 'parsed body');
+  }
+});
+
 // app.register(require('fastify-swagger'), {
 //   exposeRoute: true,
 //   routePrefix: '/doc',
