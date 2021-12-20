@@ -1,10 +1,14 @@
-import fastify from 'fastify';
+import fastify, { FastifyReply, FastifyRequest } from 'fastify';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
 
 const app = fastify({
-  logger: true,
+  logger: {
+    level: 'info',
+    prettyPrint: true,
+    file: './log.txt', // Will use pino.destination()
+  },
 });
 
 // app.register(require('fastify-swagger'), {
