@@ -12,7 +12,7 @@ const app = fastify({
       translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
 
-    // file: './log.txt', // Will use pino.destination()
+    file: './log.txt', // Will use pino.destination()
   },
 });
 
