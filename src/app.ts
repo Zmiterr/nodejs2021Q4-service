@@ -5,9 +5,14 @@ import taskRouter from './resources/tasks/task.router';
 
 const app = fastify({
   logger: {
-    level: 'info',
-    prettyPrint: true,
-    file: './log.txt', // Will use pino.destination()
+    level: 'info', // error, trace, debug, warn
+    prettyPrint: {
+      colorize: true, // colorizes the log
+      levelFirst: true,
+      translateTime: 'yyyy-dd-mm, h:MM:ss TT',
+    },
+
+    // file: './log.txt', // Will use pino.destination()
   },
 });
 
