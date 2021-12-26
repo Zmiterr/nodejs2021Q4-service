@@ -54,15 +54,20 @@ app.get('/', async () => 'Service is running!');
 
 process.on('uncaughtException', (error) => {
   logError.error(`Process on uncaughtException error = ${error.stack}`);
-  console.log(error);
-  process.exit(1);
+  // console.log(error);
+  setTimeout(() => {
+    process.exit(1);
+  }, 100);
 });
 
 process.on('unhandledRejection', (error) => {
   logError.error(`Process on unhandledRejection error = ${String(error)}`);
-  console.log(error);
-  process.exit(1);
+
+  // console.log(error);
+  setTimeout(() => {
+    process.exit(1);
+  }, 100);
 });
-// Promise.reject(Error('Oops!'));
+Promise.reject(Error('Oops!'));
 
 export default app;
