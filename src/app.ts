@@ -5,7 +5,7 @@ import taskRouter from './resources/tasks/task.router';
 
 const app = fastify({
   logger: {
-    level: 'info', // error, trace, debug, warn
+    level: process.env.LOG_LEVEL, // error, trace, debug, warn (see other in PR)
     prettyPrint: {
       colorize: true, // colorizes the log
       levelFirst: true,
