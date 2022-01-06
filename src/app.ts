@@ -4,15 +4,24 @@ import pinoms from 'pino-multi-stream';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
+import evn from './common/config';
 
-const streams = [
-  { stream: fs.createWriteStream('log.txt') },
-  { level: 'error', stream: fs.createWriteStream('error.txt') },
+const streams: pinoms.Streams = [
+  { stream: process.stdout }, // an "info" level destination stream
+  { level: 'error', stream: process.stderr }, // an "error" level destination stream
+  { stream: fs.createWriteStream('info.stream.log') },
+  { level: 'fatal', stream: fs.createWriteStream('/fatal.stream.log') },
+  { stream: pinoms.prettyStream() },
+  { stream: pinoms.prettyStream({ prettyPrint: { colorize: true } }) },
 ];
-// @ts-ignore
-export const logError = pinoms({ streams });
-logError.info('this will be written to log.txt');
-logError.error('this will be written to error.txt');
+
+export const logger = pinoms({
+  level: evn.LOG_LEVEL,
+  streams,
+});
+
+// logError.info('this will be written to log.txt');
+// logError.error('this will be written to error.txt');
 
 const app = fastify({
   logger: {
@@ -22,7 +31,7 @@ const app = fastify({
       levelFirst: true,
       translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
-    file: './log.txt', // Will use pino.destination()
+    file: './log.log', // Will use pino.destination()
   },
 });
 
@@ -53,7 +62,7 @@ routes.forEach((route) => {
 app.get('/', async () => 'Service is running!');
 
 process.on('uncaughtException', (error) => {
-  logError.error(`Process on uncaughtException error = ${error.stack}`);
+  logger.error(`Process on uncaughtException error = ${error.stack}`);
   // console.log(error);
   setTimeout(() => {
     process.exit(1);
@@ -61,13 +70,13 @@ process.on('uncaughtException', (error) => {
 });
 
 process.on('unhandledRejection', (error) => {
-  logError.error(`Process on unhandledRejection error = ${String(error)}`);
+  logger.error(`Process on unhandledRejection error = ${String(error)}`);
 
   // console.log(error);
   setTimeout(() => {
     process.exit(1);
   }, 100);
 });
-Promise.reject(Error('Oops!'));
+// Promise.reject(Error('Oops!'));
 
 export default app;

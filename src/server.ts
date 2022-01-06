@@ -1,6 +1,6 @@
 // const { PORT } = require('./common/config');
 // const app = require('./app');
-import app, { logError } from './app';
+import app, { logger } from './app';
 
 import evn from './common/config';
 
@@ -9,7 +9,7 @@ import evn from './common/config';
     await app.listen(evn.PORT);
   } catch (err) {
     app.log.error(err);
-    logError.error(String(err));
+    logger.error(String(err));
     process.exit(1);
   }
 })();
