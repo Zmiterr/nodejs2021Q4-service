@@ -1,7 +1,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { FastifyReq } from 'resources/types';
+
 import boardsRepo from './board.memory.repository';
 import Board from './board.model';
+import { FastifyReq } from '../types';
 
 /**
  * send request get all boards
