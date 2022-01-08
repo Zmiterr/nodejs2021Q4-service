@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  app:
+    image: zmiterr/q4-service
+    container_name: q4-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+    ports:
+      - ${PORT}:${PORT}
+    networks:
+      - user-defined bridge
+    restart: on-failure
+    volumes:
+      - ./src:/usr/app/src
+      - logs:/usr/app/logs
+    environment:
+      PORT: ${PORT}
+
+
+networks:
+  user-defined bridge:
+    driver: bridge
+
+volumes:
+  logs:
+

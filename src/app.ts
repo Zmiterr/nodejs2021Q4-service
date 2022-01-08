@@ -31,7 +31,7 @@ const app = fastify({
       levelFirst: true,
       translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
-    file: './log.log', // Will use pino.destination()
+    file: './logs/log.log', // Will use pino.destination()
   },
 });
 
