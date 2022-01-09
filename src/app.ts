@@ -78,10 +78,6 @@ process.on('unhandledRejection', (error) => {
   }, 100);
 });
 
-// error for test restart server
-setTimeout(() => {
-  Promise.reject(Error('Oops!'));
-}, 10000);
 // Promise.reject(Error('Oops!'));
 
 export default app;
