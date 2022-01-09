@@ -31,7 +31,7 @@ const app = fastify({
       levelFirst: true,
       translateTime: 'yyyy-dd-mm, h:MM:ss TT',
     },
-    file: './logs/log.log', // Will use pino.destination()
+    // file: './logs/log.log', // Will use pino.destination()
   },
 });
 
@@ -77,6 +77,11 @@ process.on('unhandledRejection', (error) => {
     process.exit(1);
   }, 100);
 });
+
+// error for test restart server
+setTimeout(() => {
+  Promise.reject(Error('Oops!'));
+}, 10000);
 // Promise.reject(Error('Oops!'));
 
 export default app;
