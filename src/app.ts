@@ -1,5 +1,5 @@
 import fastify, { FastifyReply, FastifyRequest } from 'fastify';
-import * as fs from 'fs';
+// import * as fs from 'fs';
 import pinoms from 'pino-multi-stream';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
@@ -8,9 +8,9 @@ import evn from './common/config';
 
 const streams: pinoms.Streams = [
   { stream: process.stdout }, // an "info" level destination stream
-  { level: 'error', stream: process.stderr }, // an "error" level destination stream
-  { stream: fs.createWriteStream('info.stream.log') },
-  { level: 'fatal', stream: fs.createWriteStream('/fatal.stream.log') },
+  // { level: 'error', stream: process.stderr }, // an "error" level destination stream
+  // { stream: fs.createWriteStream('info.stream.log') },
+  // { level: 'fatal', stream: fs.createWriteStream('/fatal.stream.log') },
   { stream: pinoms.prettyStream() },
   { stream: pinoms.prettyStream({ prettyPrint: { colorize: true } }) },
 ];
