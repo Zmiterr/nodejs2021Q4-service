@@ -1,22 +1,71 @@
-import { v4 as uuidv4 } from 'uuid';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import User from '../users/user.model';
+// eslint-disable-next-line import/no-cycle
+import Board from '../boards/board.model';
+// eslint-disable-next-line import/no-cycle
+import BoardColumn from '../colunns/columns.model';
 
 /**
  * task model
  */
+@Entity()
 export default class Task {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   title: string;
 
-  order: string;
-
+  @Column()
   description: string;
 
-  userId?: string | null;
+  @Column()
+  order: number;
 
-  boardId?: string | null;
+  @ManyToOne(() => User, {
+    deferrable: 'INITIALLY DEFERRED',
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({
+    name: 'userId',
+    referencedColumnName: 'id',
+  })
+  user: User;
 
-  columnId?: string | null;
+  @Column({ type: 'varchar', nullable: true, default: null })
+  userId: string | null;
+
+  @ManyToOne(() => Board, {
+    deferrable: 'INITIALLY DEFERRED',
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({
+    name: 'boardId',
+    referencedColumnName: 'id',
+  })
+  @Column({ type: 'varchar', nullable: true, default: null })
+  boardId: string | null;
+
+  @ManyToOne(() => BoardColumn, {
+    deferrable: 'INITIALLY DEFERRED',
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn({
+    name: 'columnId',
+    referencedColumnName: 'id',
+  })
+  @Column({
+    type: 'varchar',
+    nullable: true,
+    default: null,
+  })
+  columnId: string | null;
 
   /**
    * Task constructor
@@ -28,21 +77,21 @@ export default class Task {
    * @param boardId - boardId
    * @param  columnId - columnId
    */
-  constructor({
-    id = uuidv4(),
-    title,
-    order,
-    description,
-    userId, // assignee
-    boardId,
-    columnId,
-  }: Task) {
-    this.id = id;
-    this.title = title;
-    this.order = order;
-    this.description = description;
-    this.userId = userId;
-    this.boardId = boardId;
-    this.columnId = columnId;
-  }
+  // constructor({
+  //   id = uuidv4(),
+  //   title,
+  //   order,
+  //   description,
+  //   userId, // assignee
+  //   boardId,
+  //   columnId,
+  // }: Task) {
+  //   this.id = id;
+  //   this.title = title;
+  //   this.order = order;
+  //   this.description = description;
+  //   this.userId = userId;
+  //   this.boardId = boardId;
+  //   this.columnId = columnId;
+  // }
 }

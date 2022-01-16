@@ -1,14 +1,30 @@
-import { v4 as uuidv4 } from 'uuid';
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+// eslint-disable-next-line import/no-cycle
+import Task from '../tasks/task.model';
+// eslint-disable-next-line import/no-cycle
+import BoardColumn from '../colunns/columns.model';
 /**
  * Board model
  */
+
+@Entity()
 export default class Board {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   title: string;
 
+  @OneToMany(() => BoardColumn, (column) => column.board, {
+    eager: true,
+    cascade: true,
+  })
   columns?: string | null;
+
+  @OneToMany(() => Task, (task) => task.boardId, {
+    cascade: true,
+  })
+  tasks: Task[];
 
   /**
    * Board constructor
@@ -16,9 +32,9 @@ export default class Board {
    * @param title - title
    * @param columns - columns
    */
-  constructor({ id = uuidv4(), title, columns }: Board) {
-    this.id = id;
-    this.title = title;
-    this.columns = columns;
-  }
+  // constructor({ id = uuidv4(), title, columns }: Board) {
+  //   this.id = id;
+  //   this.title = title;
+  //   this.columns = columns;
+  // }
 }

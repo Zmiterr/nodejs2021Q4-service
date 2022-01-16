@@ -1,21 +1,22 @@
+import { getRepository } from 'typeorm';
 import Task from './task.model';
-import { inMemoryDB } from '../../inMemoryDB';
 import { TaskNoID } from './types';
+import User from '../users/user.model';
 
 /**
  * returns all tasks from DB
  * @returns array of Task objects
  */
 const getAllTasks = async (boardId: string): Promise<Task[]> =>
-  inMemoryDB.tasks.filter((task: Task) => task.boardId === boardId);
+  getRepository(Task).find({ boardId });
 
 /**
  * returns task by id from DB
  * @param id - board id
  * @returns Task object
  */
-const getTask = async (id: string): Promise<Task> => {
-  const taskByID = inMemoryDB.tasks.filter((task: Task) => task.id === id)[0];
+const getTask = async (id: string): Promise<Task | undefined> => {
+  const taskByID = getRepository(Task).findOne({ id });
   if (!taskByID) {
     throw new Error(`Task with id ${id} not found`);
   }
@@ -28,12 +29,12 @@ const getTask = async (id: string): Promise<Task> => {
  * @param board - board id
  * @returns Task object
  */
-const createTask = async (task: Task, board: string): Promise<Task> => {
-  const newTask = new Task({ ...task, boardId: board });
-  inMemoryDB.tasks.push(newTask);
-  return newTask;
-};
-
+const createTask = async (task: Task, board: string): Promise<Task> =>
+  // TODO create task
+  getRepository(Task).save({ ...task, board });
+// const newTask = new Task({ ...task, boardId: board });
+// inMemoryDB.tasks.push(newTask);
+// return newTask;
 /**
  * updates task by id
  * @param id - task id
@@ -41,14 +42,16 @@ const createTask = async (task: Task, board: string): Promise<Task> => {
  * @returns Task object
  */
 const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
-  const taskIndex = inMemoryDB.tasks.findIndex((task: Task) => task.id === id);
-  if (taskIndex === -1 || !inMemoryDB.tasks[taskIndex]) {
+  const taskById = await getRepository(Task).findOne(id);
+  if (!taskById) {
     throw new Error(`Task with id ${id} not found`);
   }
-  const currentTask: Task = inMemoryDB.tasks[taskIndex];
-  const updatedTask = { ...currentTask, ...updateData };
-  inMemoryDB.tasks[taskIndex] = updatedTask;
-  return updatedTask;
+  const taskForUpdate = { ...taskById, ...updateData };
+  return getRepository(User).save(taskForUpdate);
+  // const currentTask: Task = inMemoryDB.tasks[taskIndex];
+  // const updatedTask = { ...currentTask, ...updateData };
+  // inMemoryDB.tasks[taskIndex] = updatedTask;
+  // return updatedTask;
 };
 
 /**
@@ -57,11 +60,13 @@ const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
  * @returns - id deleted task
  */
 const deleteTask = async (id: string): Promise<string> => {
-  if (inMemoryDB.tasks.findIndex((task: Task) => task.id === id) === -1) {
+  const taskByID = await getRepository(Task).findOne({ id });
+  if (!taskByID) {
     throw new Error(`Task with id ${id} not found`);
+  } else {
+    await getRepository(Task).remove(taskByID);
+    return id;
   }
-  inMemoryDB.tasks = inMemoryDB.tasks.filter((task: Task) => task.id !== id);
-  return id;
 };
 
 export default { getAllTasks, getTask, createTask, deleteTask, updateTask };
