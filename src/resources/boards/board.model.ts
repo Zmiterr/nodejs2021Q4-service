@@ -1,8 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 // eslint-disable-next-line import/no-cycle
 import Task from '../tasks/task.model';
-// eslint-disable-next-line import/no-cycle
-import BoardColumn from '../colunns/columns.model';
+
 /**
  * Board model
  */
@@ -14,12 +13,6 @@ export default class Board {
 
   @Column()
   title: string;
-
-  @OneToMany(() => BoardColumn, (column) => column.board, {
-    eager: true,
-    cascade: true,
-  })
-  columns?: string | null;
 
   @OneToMany(() => Task, (task) => task.boardId, {
     cascade: true,

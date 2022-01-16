@@ -22,18 +22,16 @@ import env from './common/config';
   try {
     await createConnection({
       type: 'postgres',
-      host: 'postgres',
+      host: 'localhost',
       port: Number(env.POSTGRES_PORT),
       username: env.POSTGRES_USER,
       password: env.POSTGRES_PASSWORD,
       database: env.POSTGRES_DB,
       synchronize: true,
-      entities: [
-        'src/resources/users/user.model.ts',
-        'src/resources/boards/board.model.ts',
-        'src/resources/tasks/task.model.ts',
-        'src/resources/columns/column.model.ts',
-      ],
+      dropSchema: true,
+      cache: false,
+      migrationsRun: true,
+      entities: ['src/resources/**/*.model.ts'],
     }).then(() => app.listen(env.PORT, '0.0.0.0'));
   } catch (err) {
     app.log.error(err);

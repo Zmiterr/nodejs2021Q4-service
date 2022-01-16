@@ -8,8 +8,6 @@ import {
 import User from '../users/user.model';
 // eslint-disable-next-line import/no-cycle
 import Board from '../boards/board.model';
-// eslint-disable-next-line import/no-cycle
-import BoardColumn from '../colunns/columns.model';
 
 /**
  * task model
@@ -51,21 +49,6 @@ export default class Task {
   })
   @Column({ type: 'varchar', nullable: true, default: null })
   boardId: string | null;
-
-  @ManyToOne(() => BoardColumn, {
-    deferrable: 'INITIALLY DEFERRED',
-    onDelete: 'CASCADE',
-  })
-  @JoinColumn({
-    name: 'columnId',
-    referencedColumnName: 'id',
-  })
-  @Column({
-    type: 'varchar',
-    nullable: true,
-    default: null,
-  })
-  columnId: string | null;
 
   /**
    * Task constructor
