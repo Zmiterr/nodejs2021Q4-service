@@ -22,6 +22,7 @@ import env from './common/config';
   try {
     await createConnection({
       type: 'postgres',
+      // TODO dont forget change it to 'postgres' for docker
       host: 'localhost',
       port: Number(env.POSTGRES_PORT),
       username: env.POSTGRES_USER,
@@ -32,7 +33,12 @@ import env from './common/config';
       cache: false,
       migrationsRun: true,
       entities: ['src/resources/**/*.model.ts'],
-    }).then(() => app.listen(env.PORT, '0.0.0.0'));
+      migrations: ['src/migrations/*.ts'],
+      cli: {
+        migrationsDir: 'src/migrations',
+      },
+    });
+    await app.listen(env.PORT, '0.0.0.0');
   } catch (err) {
     app.log.error(err);
     logger.error(String(err));
