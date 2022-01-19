@@ -64,12 +64,6 @@ const deleteUser = async (id: string): Promise<string> => {
     throw new Error(`User with id ${id} not found`);
   }
   await getRepository(User).remove(userById);
-  // TODO remove task
-  // await getRepository(Task).remove(userById);
-  // inMemoryDB.tasks.forEach((task: Task) => {
-  //   const editedTask = task;
-  //   if (task.userId === id) editedTask.userId = null;
-  // });
 
   return id;
 };

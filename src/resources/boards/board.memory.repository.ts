@@ -47,20 +47,19 @@ const updateBoard = async (
  * @param id - board id
  * @returns id deleted board
  */
-const deleteBoard = async (id: string): Promise<string> => {
-  const boardToDelete = await getRepository(Board).findOne(id);
-  if (!boardToDelete) {
-    throw new Error(`Board with id ${id} not found`);
-  }
-  await getRepository(Board).remove(boardToDelete);
-  // TODO remove task
-  // await getRepository(Task).remove(boardToDelete);
-  //
-  // inMemoryDB.tasks = inMemoryDB.tasks.filter(
-  //   (task: Task) => task.boardId !== id
-  // );
+const deleteBoard = async (id: string): Promise<Board | null> => {
+  // const deletedBoard = await getRepository(Board).findOne(id);
+  // if (deletedBoard) {
+  //   return getRepository(Board).remove(deletedBoard);
+  // }
+  const repository = getRepository(Board);
+  const currentBoard = await repository.findOne(id);
 
-  return id;
+  if (currentBoard) {
+    await repository.delete(id);
+    return currentBoard;
+  }
+  return null;
 };
 
 export default {
