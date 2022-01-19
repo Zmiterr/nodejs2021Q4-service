@@ -9,6 +9,8 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "nodemon --config nodemon.json --exitcrash -L src/server.ts",
+    "generate": "npx ts-node --transpile-only ./node_modules/typeorm/cli.js migration:generate -p -n name --config ormconfig.ts",
+    "drop": "ts-node --transpile-only ./node_modules/typeorm/cli.js schema:drop",
     "build": "tsc",
     "lint": "eslint --ext .js,.ts --fix src/",
     "test": "cross-env DEBUG=rs:* jest --testMatch \"<rootDir>/test/e2e/test/*.test.js\" --noStackTrace --runInBand",
