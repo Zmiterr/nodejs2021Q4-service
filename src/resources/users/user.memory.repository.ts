@@ -13,10 +13,9 @@ const getAll = async (): Promise<UserToResponse[]> => getManager().find(User);
  * @param  id - user id
  * @returns  User object
  */
-const getUser = async (id: string): Promise<void> => {
-  const userById = await getRepository(User).findOne(id);
-  User.toResponse(userById);
-};
+const getUser = async (id: string): Promise<User | undefined> =>
+  getRepository(User).findOne(id);
+
 // {
 //   const userById = inMemoryDB.users.filter((user: User) => user.id === id)[0];
 //   if (!userById) {
@@ -30,11 +29,12 @@ const getUser = async (id: string): Promise<void> => {
  * @param user - user data
  * @returns User object
  */
-const createUser = async (user: User): Promise<UserToResponse> =>
-  getRepository(User).save(user);
-// const newUser = new User(user);
-// inMemoryDB.users.push(newUser);
-// return User.toResponse(newUser);
+const createUser = async (user: User): Promise<UserToResponse> => {
+  const newUser = await getRepository(User).save(user);
+  // const newUser = new User(user);
+  // inMemoryDB.users.push(newUser);
+  return User.toResponse(newUser);
+};
 /**
  * updates user by id
  * @param id - user id
