@@ -31,7 +31,7 @@ import env from './common/config';
       synchronize: true,
       dropSchema: true,
       cache: false,
-      migrationsRun: true,
+      migrationsRun: false,
       entities: ['src/resources/**/*.model.ts'],
       migrations: ['src/migrations/*.ts'],
       cli: {

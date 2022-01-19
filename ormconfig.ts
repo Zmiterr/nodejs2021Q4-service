@@ -12,10 +12,10 @@ export default {
   username: env.POSTGRES_USER,
   password: env.POSTGRES_PASSWORD,
   database: env.POSTGRES_DB,
-  synchronize: false,
+  synchronize: true,
   dropSchema: true,
   cache: false,
-  migrationsRun: true,
+  migrationsRun: false,
   entities: [User, Task, Board],
   migrations: ['src/migrations/*{.ts}'],
   cli: {
