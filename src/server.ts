@@ -7,16 +7,15 @@ import env from './common/config';
   try {
     await createConnection({
       type: 'postgres',
-      // TODO dont forget change it to 'postgres' for docker
-      host: 'localhost',
+      host: 'q4',
       port: Number(env.POSTGRES_PORT),
       username: env.POSTGRES_USER,
       password: env.POSTGRES_PASSWORD,
       database: env.POSTGRES_DB,
-      synchronize: true,
+      synchronize: false,
       dropSchema: true,
       cache: false,
-      migrationsRun: false,
+      migrationsRun: true,
       entities: ['src/resources/**/*.model.ts'],
       migrations: ['src/migrations/*.ts'],
       cli: {
