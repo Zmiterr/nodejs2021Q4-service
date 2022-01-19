@@ -8,6 +8,7 @@ import {
 import User from '../users/user.model';
 // eslint-disable-next-line import/no-cycle
 import Board from '../boards/board.model';
+// eslint-disable-next-line import/no-cycle
 import { BoardColumn } from '../colunns/columns.model';
 
 /**

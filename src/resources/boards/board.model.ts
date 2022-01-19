@@ -1,6 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 // eslint-disable-next-line import/no-cycle
 import Task from '../tasks/task.model';
+// eslint-disable-next-line import/no-cycle
 import { BoardColumn } from '../colunns/columns.model';
 
 /**

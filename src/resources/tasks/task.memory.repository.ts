@@ -1,7 +1,6 @@
 import { getRepository } from 'typeorm';
 import Task from './task.model';
 import { TaskNoID } from './types';
-import User from '../users/user.model';
 
 /**
  * returns all tasks from DB
@@ -16,7 +15,8 @@ const getAllTasks = async (boardId: string): Promise<Task[]> =>
  * @returns Task object
  */
 const getTask = async (id: string): Promise<Task | undefined> => {
-  const taskByID = getRepository(Task).findOne({ id });
+  const taskByID = await getRepository(Task).findOne({ id });
+
   if (!taskByID) {
     throw new Error(`Task with id ${id} not found`);
   }
@@ -26,12 +26,12 @@ const getTask = async (id: string): Promise<Task | undefined> => {
 /**
  * creates new task
  * @param task - task data
- * @param board - board id
+ * @param boardId - board id
  * @returns Task object
  */
-const createTask = async (task: Task, board: string): Promise<Task> =>
+const createTask = async (task: Task, boardId: string): Promise<Task> =>
   // TODO create task
-  getRepository(Task).save({ ...task, board });
+  getRepository(Task).save({ ...task, boardId });
 // const newTask = new Task({ ...task, boardId: board });
 // inMemoryDB.tasks.push(newTask);
 // return newTask;
@@ -47,7 +47,7 @@ const updateTask = async (id: string, updateData: TaskNoID): Promise<Task> => {
     throw new Error(`Task with id ${id} not found`);
   }
   const taskForUpdate = { ...taskById, ...updateData };
-  return getRepository(User).save(taskForUpdate);
+  return getRepository(Task).save(taskForUpdate);
   // const currentTask: Task = inMemoryDB.tasks[taskIndex];
   // const updatedTask = { ...currentTask, ...updateData };
   // inMemoryDB.tasks[taskIndex] = updatedTask;

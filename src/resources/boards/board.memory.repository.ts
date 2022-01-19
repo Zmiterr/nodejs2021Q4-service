@@ -13,7 +13,13 @@ const getAllBoards = async (): Promise<Board[]> => getManager().find(Board);
  * @param id - board id
  * @returns  Board object
  */
-const getBoard = async (id: string) => getRepository(Board).findOne(id);
+const getBoard = async (id: string) => {
+  const board = await getRepository(Board).findOne(id);
+  if (!board) {
+    throw new Error(`Board with id ${id} not found`);
+  }
+  return board;
+};
 
 /**
  * creates new board
@@ -47,19 +53,14 @@ const updateBoard = async (
  * @param id - board id
  * @returns id deleted board
  */
-const deleteBoard = async (id: string): Promise<Board | null> => {
-  // const deletedBoard = await getRepository(Board).findOne(id);
-  // if (deletedBoard) {
-  //   return getRepository(Board).remove(deletedBoard);
-  // }
-  const repository = getRepository(Board);
-  const currentBoard = await repository.findOne(id);
+const deleteBoard = async (id: string): Promise<Board> => {
+  const deletedBoard = await getRepository(Board).findOne(id);
 
-  if (currentBoard) {
-    await repository.delete(id);
-    return currentBoard;
+  if (!deletedBoard) {
+    throw new Error(`User with id ${id} not found`);
   }
-  return null;
+
+  return getRepository(Board).remove(deletedBoard);
 };
 
 export default {
