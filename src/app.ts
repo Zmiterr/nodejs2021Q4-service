@@ -1,11 +1,11 @@
-import fastify, { FastifyReply, FastifyRequest } from 'fastify';
-// import * as fs from 'fs';
+import fastify from 'fastify';
 import pinoms from 'pino-multi-stream';
+import jwt from 'jsonwebtoken';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
 import loginRouter from './resources/login/login.router';
-import evn from './common/config';
+import env from './common/config';
 
 const streams: pinoms.Streams = [
   { stream: process.stdout }, // an "info" level destination stream
@@ -17,7 +17,7 @@ const streams: pinoms.Streams = [
 ];
 
 export const logger = pinoms({
-  level: evn.LOG_LEVEL,
+  level: env.LOG_LEVEL,
   streams,
 });
 
@@ -36,10 +36,28 @@ const app = fastify({
   },
 });
 
-app.addHook('preHandler', async (req: FastifyRequest, reply: FastifyReply) => {
-  if (req.body) {
-    req.log.info({ body: req.body, params: req.params }, 'parsed body');
-    reply.log.info({ body: req.body }, 'parsed body');
+app.addHook('preHandler', async (req, res) => {
+  const freeLinks = ['/', '/doc', '/login'];
+  const isFreeLinks = () => freeLinks.includes(req.url);
+
+  if (isFreeLinks()) {
+    try {
+      res.log.warn({ url: req.url }, 'test');
+      const token = req.headers.authorization!.split(' ')[1];
+      res.log.warn(
+        { url: req.url },
+        `${token} ---${Object.keys(
+          req.headers
+        )}------------------------------------------------------------------------`
+      );
+      if (!token) {
+        res.status(401).send('Wrong authorization data');
+      }
+      const isVerify = jwt.verify(token, String(env.JWT_SECRET_KEY));
+      res.log.warn({ url: req.url }, `Verify: ${isVerify}`);
+    } catch (e) {
+      res.status(401).send(e);
+    }
   }
 });
 
