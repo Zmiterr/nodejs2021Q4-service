@@ -7,7 +7,7 @@ import env from './common/config';
   try {
     await createConnection({
       type: 'postgres',
-      host: 'q4',
+      host: env.TYPEORM_HOST,
       port: Number(env.POSTGRES_PORT),
       username: env.POSTGRES_USER,
       password: env.POSTGRES_PASSWORD,
