@@ -41,7 +41,7 @@ export default class User {
    * @param user - full user  data
    * @returns - user data without passwords
    */
-  static toResponse(user: any) {
+  static toResponse(user: User) {
     const { id, name, login } = user;
     return { id, name, login };
   }
