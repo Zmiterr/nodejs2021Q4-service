@@ -74,7 +74,7 @@ const app = fastify({
 // });
 
 const routes = [...userRouter, ...boardRouter, ...taskRouter, ...loginRouter];
-routes.forEach((route: any) => {
+routes.forEach((route) => {
   app.route(route);
 });
 

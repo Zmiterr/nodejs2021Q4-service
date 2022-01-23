@@ -2,7 +2,7 @@ import loginService from './login.service.';
 
 const loginRoutes = [
   {
-    method: 'POST',
+    method: 'POST' as const,
     url: '/login',
     handler: loginService.loginUser,
   },
