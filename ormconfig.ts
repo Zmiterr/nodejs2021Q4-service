@@ -7,8 +7,7 @@ import { BoardColumn } from './src/resources/colunns/columns.model';
 
 export default {
   type: 'postgres',
-  // TODO dont forget change it to 'postgres' for docker
-  host: 'localhost',
+  host: 'postgres',
   port: Number(env.POSTGRES_PORT),
   username: env.POSTGRES_USER,
   password: env.POSTGRES_PASSWORD,
