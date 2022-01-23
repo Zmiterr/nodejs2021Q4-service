@@ -40,7 +40,7 @@ app.addHook('preHandler', async (req, res) => {
   const freeLinks = ['/', '/doc', '/login'];
   const isFreeLinks = () => freeLinks.includes(req.url);
 
-  if (isFreeLinks()) {
+  if (!isFreeLinks()) {
     try {
       res.log.warn({ url: req.url }, 'test');
       const token = req.headers.authorization!.split(' ')[1];
