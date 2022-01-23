@@ -8,7 +8,15 @@
 ## Downloading
 
 ```
-git clone {repository URL}
+git clone https://github.com/Zmiterr/nodejs2021Q4-service.git
+cd ./nodejs2021Q4-service
+git checkout t8-jwt
+```
+
+## Run with docker
+Install docker compose before
+```
+docker-compose up --build
 ```
 
 ## Installing NPM modules
