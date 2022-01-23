@@ -4,6 +4,7 @@ import pinoms from 'pino-multi-stream';
 import userRouter from './resources/users/user.router';
 import boardRouter from './resources/boards/board.router';
 import taskRouter from './resources/tasks/task.router';
+import loginRouter from './resources/login/login.router';
 import evn from './common/config';
 
 const streams: pinoms.Streams = [
@@ -54,8 +55,8 @@ app.addHook('preHandler', async (req: FastifyRequest, reply: FastifyReply) => {
 //   },
 // });
 
-const routes = [...userRouter, ...boardRouter, ...taskRouter];
-routes.forEach((route) => {
+const routes = [...userRouter, ...boardRouter, ...taskRouter, ...loginRouter];
+routes.forEach((route: any) => {
   app.route(route);
 });
 
