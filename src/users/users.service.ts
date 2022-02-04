@@ -30,6 +30,10 @@ export class UsersService {
     return fetchData ? <Users>Users.toResponse(fetchData) : undefined;
   }
 
+  async findOne(login: string): Promise<Users> {
+    return await this.rep.findOne({ where: { login } });
+  }
+
   async remove(id: string): Promise<boolean> {
     const fetchData = await this.rep.delete(id);
     if (fetchData.affected) {
