@@ -7,17 +7,32 @@ import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
+import { FileModule } from './file/file.module';
+import { ConfigModule } from '@nestjs/config';
+import Users from './users/entities/user.entity';
+import Boards from './boards/entities/board.entity';
+import Tasks from './tasks/entities/task.entity';
+import { name1644003978653 } from '../migrations/mig1644003978653';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env`,
+    }),
     BoardsModule,
     UsersModule,
     TasksModule,
     AuthModule,
+    FileModule,
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
-          autoLoadEntities: true,
+          entities: [Users, Boards, Tasks],
+          dropSchema: true,
+          migrationsRun: true,
+          synchronize: false,
+          migrations: [name1644003978653],
+          // autoLoadEntities: true,
         }),
     }),
   ],
