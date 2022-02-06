@@ -16,4 +16,12 @@ export class FilesService {
     const file = createReadStream(join(filesDir, filename));
     return new StreamableFile(file);
   }
+  getFileCustomized(filename, res): StreamableFile {
+    const file = createReadStream(join(filesDir, filename));
+    res.set({
+      'Content-Type': 'application/json',
+      'Content-Disposition': `attachment; filename="${filename}`,
+    });
+    return new StreamableFile(file);
+  }
 }

@@ -6,6 +6,7 @@ import {
   UploadedFile,
   Get,
   Param,
+  Response,
   StreamableFile,
 } from '@nestjs/common';
 import { FilesService } from './files.service';
@@ -42,7 +43,13 @@ export class FilesControllerExpress {
   }
 
   @Get(':filename')
-  getFile(@Param('filename') filename: string): StreamableFile {
-    return this.filesService.downloadFile(filename);
+  // getFile(@Param('filename') filename: string): StreamableFile {
+  //   return this.filesService.downloadFile(filename);
+  // }
+  getFileCustomizedResponse(
+    @Response({ passthrough: true }) res,
+    @Param('filename') filename: string,
+  ): StreamableFile {
+    return this.filesService.getFileCustomized(filename, res);
   }
 }
