@@ -5,6 +5,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
+import { MyLogger } from './MyLogger';
 
 async function bootstrap() {
   const isUseFastify = process.env.USE_FASTIFY === 'true';
@@ -15,6 +16,9 @@ async function bootstrap() {
       const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
         fastifyAdapter,
+        {
+          logger: new MyLogger(),
+        },
       );
       app.enableCors();
       console.log('You has been started fastify app');
