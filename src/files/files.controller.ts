@@ -33,8 +33,8 @@ export class FilesControllerExpress {
   @Post()
   @UseInterceptors(FileInterceptor('file', { storage }))
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
-    if (!fs.existsSync('upload')) {
-      fs.mkdir('upload', (err) => {
+    if (!fs.existsSync('../dist/upload')) {
+      fs.mkdir('../dist/upload', { recursive: true }, (err) => {
         if (err) throw err;
       });
     }
