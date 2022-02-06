@@ -7,7 +7,7 @@ import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { AuthModule } from './auth/auth.module';
-import { FileModule } from './file/file.module';
+import { FilesModule } from './files/files.module';
 import { ConfigModule } from '@nestjs/config';
 import Users from './users/entities/user.entity';
 import Boards from './boards/entities/board.entity';
@@ -23,7 +23,7 @@ import { name1644003978653 } from '../migrations/mig1644003978653';
     UsersModule,
     TasksModule,
     AuthModule,
-    FileModule,
+    FilesModule,
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
